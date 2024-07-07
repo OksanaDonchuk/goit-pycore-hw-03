@@ -1,6 +1,7 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
+from typing import List, Dict
 
-def get_upcoming_birthdays(users):
+def get_upcoming_birthdays(users: List[Dict[str, str]]) -> List[Dict[str, str]]:
     """
     Determines which colleagues have birthdays in the next 7 days, including today.
     If a birthday falls on a weekend, the congratulation date is moved to the next Monday.
@@ -8,9 +9,9 @@ def get_upcoming_birthdays(users):
     :param users: A list of dictionaries, each containing the keys 'name' (str) and 'birthday' (str in 'YYYY.MM.DD' format).
     :return: A list of dictionaries with 'name' and 'congratulation_date' (str in 'YYYY.MM.DD' format).
     """
-    today = datetime.today().date()
-    end_date = today + timedelta(days=7)
-    upcoming_birthdays = []
+    today: date = datetime.today().date()  # Типізація змінної
+    end_date: date = today + timedelta(days=7)
+    upcoming_birthdays: List[Dict[str, str]] = []
 
     for user in users:
         birthday = datetime.strptime(user["birthday"], "%Y.%m.%d").date()
